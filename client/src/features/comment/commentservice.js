@@ -1,4 +1,5 @@
 import axios from "axios";
+import { API_URL } from "../../config";
 
 const getallcommentuser = async (id, token) => {
   const options = {
@@ -7,7 +8,10 @@ const getallcommentuser = async (id, token) => {
     },
   };
 
-  const response = await axios.get(`/api/bookings/${id}/comment`, options);
+  const response = await axios.get(
+    `${API_URL}/api/bookings/${id}/comment`,
+    options
+  );
   // console.log(response.data)
   return response.data;
 };
@@ -21,7 +25,7 @@ const addcommentuser = async (formdata, token) => {
   console.log(options);
 
   const response = await axios.post(
-    `/api/bookings/${formdata._id}/comment`,
+    `${API_URL}/api/bookings/${formdata._id}/comment`,
     formdata,
     options
   );

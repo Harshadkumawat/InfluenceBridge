@@ -1,16 +1,22 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-require("dotenv").config();
 const colors = require("colors");
+const cors = require("cors");
+require("dotenv").config();
 const connectDB = require("./config/db_config");
-const errorHandler = require("./middleware/errorHandier"); // make sure filename matches exactly
+const errorHandler = require("./middleware/errorHandier");
+
 const PORT = process.env.PORT || 5050;
+const __dirname = path.resolve(); // Only define once
 
 // Connect to database
 connectDB();
 
-// Middleware for parsing JSON and URL-encoded data
+// CORS fix ✅
+app.use(cors({ origin: "*" }));
+
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -23,7 +29,6 @@ app.use("/api/comments", require("./routers/commentrouter"));
 
 // Serve frontend in production
 if (process.env.NODE_ENV === "production") {
-  const __dirname = path.resolve();
   app.use(express.static(path.join(__dirname, "/client/dist")));
 
   app.get("*", (req, res, next) => {
@@ -31,13 +36,12 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));
   });
 } else {
-  // Dev root route
   app.get("/", (req, res) => {
     res.send("Influencer API running...");
   });
 }
 
-// Error handling middleware
+// Error handler
 app.use(errorHandler);
 
 // Start server

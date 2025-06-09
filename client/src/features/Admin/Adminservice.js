@@ -1,8 +1,9 @@
 import axios from "axios";
+import { API_URL } from "../../config";
 
 ///get all influencers
 const getallInfluencersforadmin = async () => {
-  const response = await axios.get(`/api/influencer`);
+  const response = await axios.get(`${API_URL}/api/influencer`);
   return response.data;
 };
 
@@ -14,7 +15,7 @@ const getalluserforadmin = async (token) => {
       authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.get(`/api/admin/users`, options);
+  const response = await axios.get(`${API_URL}/api/admin/users`, options);
   return response.data;
 };
 
@@ -26,7 +27,7 @@ const getallbookingforadmin = async (token) => {
     },
   };
 
-  const response = await axios.get(`/api/admin/bookings`, options);
+  const response = await axios.get(`${API_URL}/api/admin/bookings`, options);
   //    console.log(response.data)
   return response.data;
 };
@@ -39,7 +40,7 @@ const getallcommentforadmin = async (token) => {
       authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.get(`/api/admin/comment`, options);
+  const response = await axios.get(`${API_URL}/api/admin/comment`, options);
   // console.log(response.data)
   return response.data;
 };
@@ -59,7 +60,7 @@ const createnewinfluencers = async (formData, token) => {
 
   try {
     const response = await axios.post(
-      `/api/admin/influencer`,
+      `${API_URL}/api/admin/influencer`,
       formData,
       options
     );
@@ -83,7 +84,7 @@ const updateinfluencers = async (fromdata, token) => {
   };
 
   const response = await axios.put(
-    `/api/admin/influencer/` + fromdata._id,
+    `${API_URL}/api/admin/influencer/` + fromdata._id,
     fromdata,
     options
   );
@@ -100,7 +101,10 @@ const deteleinfluencers = async (id, token) => {
     },
   };
   // console.log(fromdata._id)
-  const response = await axios.delete(`/api/admin/influencer/` + id, options);
+  const response = await axios.delete(
+    `${API_URL}/api/admin/influencer/` + id,
+    options
+  );
   // console.log(response.data)
   return response.data;
 };
@@ -115,7 +119,7 @@ const updatabookinng = async (formdata, token) => {
   };
   console.log(formdata);
   const response = await axios.put(
-    `/api/admin/bookings/${formdata.id}`,
+    `${API_URL}/api/admin/bookings/${formdata.id}`,
     { status: formdata.value },
     options
   );
@@ -133,7 +137,7 @@ const addcommnet = async (formdata, token) => {
   };
   console.log(formdata);
   const response = await axios.post(
-    `/api/bookings/${formdata._id}/comment`,
+    `${API_URL}/api/bookings/${formdata._id}/comment`,
     formdata,
     options
   );
