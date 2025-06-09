@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_URL } from "../../config";
+const BaseUrl = "https://influencebridge.onrender.com";
 
 const getallcommentuser = async (id, token) => {
   const options = {
@@ -9,7 +9,7 @@ const getallcommentuser = async (id, token) => {
   };
 
   const response = await axios.get(
-    `${API_URL}/api/bookings/${id}/comment`,
+    `${BaseUrl}/api/bookings/${id}/comment`,
     options
   );
   // console.log(response.data)
@@ -25,7 +25,7 @@ const addcommentuser = async (formdata, token) => {
   console.log(options);
 
   const response = await axios.post(
-    `${API_URL}/api/bookings/${formdata._id}/comment`,
+    `${BaseUrl}/api/bookings/${formdata._id}/comment`,
     formdata,
     options
   );

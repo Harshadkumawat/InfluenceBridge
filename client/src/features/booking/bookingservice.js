@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_URL } from "../../config";
+const BaseUrl = "https://influencebridge.onrender.com";
 
 const fetchAllBookingForUser = async (token) => {
   const options = {
@@ -7,7 +7,7 @@ const fetchAllBookingForUser = async (token) => {
       authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.get(`${API_URL}/api/bookings`, options);
+  const response = await axios.get(`${BaseUrl}/api/bookings`, options);
 
   return response.data;
 };
@@ -19,7 +19,7 @@ const AddBookingForUser = async (id, token) => {
     },
   };
 
-  const response = await axios.post(`${API_URL}/api/bookings/${id}`, {}, options);
+  const response = await axios.post(`${BaseUrl}/api/bookings/${id}`, {}, options);
 
   console.log("add booking");
   return response.data;

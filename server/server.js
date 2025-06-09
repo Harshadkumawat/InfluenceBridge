@@ -8,13 +8,13 @@ const connectDB = require("./config/db_config");
 const errorHandler = require("./middleware/errorHandier");
 
 const PORT = process.env.PORT || 5050;
-const __dirname = path.resolve(); // Only define once
+
 
 // Connect to database
 connectDB();
 
 // CORS fix ✅
-app.use(cors({ origin: "*" }));
+app.use(cors({ allwOrigin: "*" }));
 
 // Middleware
 app.use(express.json());
